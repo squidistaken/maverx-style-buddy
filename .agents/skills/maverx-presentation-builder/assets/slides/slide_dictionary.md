@@ -165,9 +165,10 @@ Every final slide should include trainer-ready speaker notes with this structure
 - Source slide: `templates.pptx`, slide 3.
 - What it does: Provides a simple three-part text layout with subtitles,
   bullets, and a wrap-up area.
-- How to use it: Assign one idea to each section. Keep each section short, with
-  a maximum of 3 supporting points. Use the wrap-up area for takeaways or next
-  steps.
+- How to use it: Assign one idea to each section and actually use all three
+  sections. Give each section 1-3 short supporting points. Use the final
+  section for takeaway, application, or next step so the slide feels complete
+  rather than sparse.
 - When to use it: Use for lightweight comparison, three-part explanations,
   recap slides, and low-visual theory slides.
 
@@ -189,8 +190,9 @@ Every final slide should include trainer-ready speaker notes with this structure
 - Source slide: `templates.pptx`, slide 5.
 - What it does: Provides a clean, light-background text page with ordered,
   regular, and bulleted text examples.
-- How to use it: Use one primary text structure, not all three at once. Keep
-  whitespace generous and preserve the blue text hierarchy.
+- How to use it: Use one primary text structure, not all three at once. Fill
+  the body area with a compact stack of 3-6 short lines or steps so the slide
+  earns the space it occupies. Preserve the blue text hierarchy.
 - When to use it: Use for short instructions, definitions, ordered steps,
   simple explanations, or participant prompts.
 
@@ -276,7 +278,8 @@ Every final slide should include trainer-ready speaker notes with this structure
 - How to use it: Give each card a one-word action label, one short title, and
   one concise explanation. Keep the final wide card for the broadest or
   integrative capability.
-- When to use it: Use for learning outcomes, principles, capabilities,
+- When to use it: Prefer this when you have 4-5 parallel ideas and want a full
+  slide with strong information density. Use for learning outcomes, principles, capabilities,
   maturity dimensions, or a memorable five-part model.
 
 ### 13. Four Section Slide
@@ -288,7 +291,8 @@ Every final slide should include trainer-ready speaker notes with this structure
   light card backgrounds.
 - How to use it: Use one clear category per quadrant. Keep each quadrant to a
   compact paragraph or 3-4 bullets. Preserve the colored header logic.
-- When to use it: Use for audience definition, learning objectives, target
+- When to use it: Prefer this when the content would otherwise leave a sparse
+  slide. Use for audience definition, learning objectives, target
   group, good-to-know notes, course setup, or balanced four-part summaries.
 
 ### 14. Dark Section Title Slide
@@ -321,8 +325,9 @@ Every final slide should include trainer-ready speaker notes with this structure
 - Source slide: `templates.pptx`, slide 16.
 - What it does: Provides three equal colored vertical cards for parallel
   sections.
-- How to use it: Use one label and one short text block per card. Keep the
-  three items parallel in grammar and importance.
+- How to use it: Use one label and one meaningful text block per card. Fill all
+  three cards with parallel, comparable points so the slide reads as a complete
+  set rather than one strong card plus empty space.
 - When to use it: Use for three lenses, three options, three examples, three
   principles, or a simple compare-and-contrast set.
 
@@ -346,6 +351,8 @@ Every final slide should include trainer-ready speaker notes with this structure
 - What it does: Provides a lighter section divider with the same angled image
   language as the theory slide.
 - How to use it: Use a short title and preserve the large open white space.
+  Use sparingly; this is intentionally sparse and should not become a default
+  content slide.
 - When to use it: Use for softer transitions, subsection openers, or moments
   where a full dark divider would feel too heavy.
 
@@ -381,7 +388,8 @@ Every final slide should include trainer-ready speaker notes with this structure
 - What it does: Poses a central question using a large illustration and minimal
   text.
 - How to use it: Replace the title with the question or prompt. Keep the slide
-  visually sparse so participants focus on the question.
+  visually sparse so participants focus on the question. Use only when the
+  sparseness is doing real facilitation work.
 - When to use it: Use for reflection prompts, discussion starters, checks for
   understanding, or provocative transitions.
 
@@ -404,6 +412,8 @@ Every final slide should include trainer-ready speaker notes with this structure
 - What it does: Sets up a debrief or reflection moment with a dark overlay and
   live-session photo treatment.
 - How to use it: Use the title for the debrief topic. Follow with spoken or
-  written questions rather than filling the slide with text.
+  written questions rather than filling the slide with text. Keep this template
+  for true consolidation moments, not general wrap-up content that needs more
+  on-slide substance.
 - When to use it: Use after demos, exercises, simulations, group work, or any
   activity that needs consolidation into learning.
