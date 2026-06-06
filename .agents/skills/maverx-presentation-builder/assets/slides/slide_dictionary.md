@@ -113,6 +113,8 @@ Color selection rules:
 - The example slides and assets are inspiration, not rigid templates.
 - Be creative with layout, composition, and pacing.
 - Not every slide needs the same structure.
+- Ensure there is not too much white space. Feel free to fill it with images you
+  source from generating them yourself or online.
 - Keep Maverx colors, fonts, logo usage, footer treatment, and overall style
   consistent across the deck.
 - Teach theory by introducing the concept, showing an audience-relevant
