@@ -1,0 +1,1308 @@
+{
+  "schema_version": "1.0",
+  "training": {
+    "slug": "prompt-engineering-for-tech-consultants",
+    "title": "Prompt Engineering for Tech Consultants",
+    "scope": "multi_session",
+    "total_sessions": 2,
+    "total_minutes": 120
+  },
+  "intake_summary": {
+    "topic": "Prompt engineering",
+    "audience": "Junior to mid-level tech consultants",
+    "knowledge_level": "beginner",
+    "duration": {
+      "sessions": 2,
+      "minutes_per_session": 60
+    },
+    "primary_objective": "Participants can explain prompt engineering, use a practical set of tool-agnostic prompting techniques, and explain why those techniques improve model responses.",
+    "case_sector": "Technology consulting and client advisory work",
+    "tools": [
+      "tool-agnostic large language model chat interface"
+    ],
+    "prep_time_minutes_per_session": 10,
+    "include_handouts": true,
+    "handout_time_minutes_per_session": 5,
+    "include_breaks": true,
+    "break_time_minutes_per_session": 5
+  },
+  "research_evidence": [
+    {
+      "source_title": "OpenAI Academy: Prompting fundamentals",
+      "source_url": "https://openai.com/academy/prompting/",
+      "source_type": "official",
+      "key_takeaway": "Effective prompting starts with a clear task, audience, context, desired output, and iteration based on the response.",
+      "used_for": "Sequencing session 1 around task clarity, context, format, and iterative refinement.",
+      "evidence_strength": "high"
+    },
+    {
+      "source_title": "OpenAI Help Center: Prompt engineering best practices for ChatGPT",
+      "source_url": "https://help.openai.com/en/articles/10032626-prompt-engineering-best--practices-for-chatgpt",
+      "source_type": "official",
+      "key_takeaway": "Prompt engineering is designing and optimizing inputs; clarity, specificity, context, tone, and iterative refinement improve response quality.",
+      "used_for": "Defining beginner-friendly prompting vocabulary and common improvement levers.",
+      "evidence_strength": "high"
+    },
+    {
+      "source_title": "OpenAI Help Center: Best practices for prompt engineering with the OpenAI API",
+      "source_url": "https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api",
+      "source_type": "official",
+      "key_takeaway": "Useful prompt patterns include placing instructions clearly, separating context from instructions, being specific about format, and giving examples.",
+      "used_for": "Selecting the core techniques participants practice in both sessions.",
+      "evidence_strength": "high"
+    },
+    {
+      "source_title": "Microsoft Learn: Prompt engineering techniques",
+      "source_url": "https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering",
+      "source_type": "official",
+      "key_takeaway": "Model responses depend on prompt context and wording; supporting content, specificity, order, and giving the model an explicit fallback can shape outputs, but outputs still need validation.",
+      "used_for": "Explaining why techniques work and adding validation and fallback patterns.",
+      "evidence_strength": "high"
+    },
+    {
+      "source_title": "The Prompt Report: A Systematic Survey of Prompting Techniques",
+      "source_url": "https://arxiv.org/abs/2406.06608",
+      "source_type": "academic",
+      "key_takeaway": "Prompting has many named techniques and inconsistent terminology, so training should emphasize reusable principles and task-fit rather than memorizing labels.",
+      "used_for": "Keeping the course tool-agnostic and limiting beginner content to a small, transferable technique set.",
+      "evidence_strength": "medium"
+    },
+    {
+      "source_title": "OWASP Foundation: Prompt Injection",
+      "source_url": "https://owasp.org/www-community/attacks/PromptInjection",
+      "source_type": "professional",
+      "key_takeaway": "Prompt injection can manipulate model behavior through adversarial instructions, so consultants should understand the limit of prompt-only control and validate sensitive outputs.",
+      "used_for": "Adding a practical risk and verification segment without turning the course into a security course.",
+      "evidence_strength": "medium"
+    }
+  ],
+  "programme_learning_outcomes": [
+    "Explain prompt engineering as the deliberate design and refinement of instructions, context, examples, and constraints for language models.",
+    "Diagnose weak prompts by identifying ambiguity, missing context, unclear output expectations, and absent validation criteria.",
+    "Apply a small tool-agnostic prompt pattern set: task framing, context separation, format specification, examples, decomposition, iteration, and fallback instructions.",
+    "Explain why prompting techniques work in practical terms: they reduce ambiguity, shape likely response patterns, provide relevant context, and create useful feedback loops.",
+    "Use prompt engineering responsibly by checking outputs, spotting overconfidence, and recognizing prompt-injection risk in consultant workflows."
+  ],
+  "sessions": [
+    {
+      "session_n": 1,
+      "title": "Prompting Fundamentals: From Vague Requests to Useful Outputs",
+      "duration_min": 60,
+      "brief_for_trainer": {
+        "session_purpose": "Give beginner consultants a practical mental model of prompt engineering and a repeatable structure for improving everyday prompts.",
+        "intended_skills": [
+          "Explain prompt engineering in plain language",
+          "Identify prompt components",
+          "Rewrite vague prompts",
+          "Specify context and output format",
+          "Iterate based on model responses"
+        ],
+        "learning_outcomes": [
+          "Participants can distinguish a weak prompt from a stronger prompt using concrete criteria.",
+          "Participants can build a prompt with task, context, constraints, output format, and success criteria.",
+          "Participants can explain why specificity and iteration improve the odds of useful responses."
+        ]
+      },
+      "pre_bite": {
+        "purpose": "Activate participants' current habits and create material for the kick-off diagnostic.",
+        "time_min": 10,
+        "participant_task": "Bring one recent or plausible consulting task where an LLM could help, and write the first prompt you would normally try.",
+        "resources": [
+          {
+            "title": "OpenAI Academy: Prompting fundamentals",
+            "url_or_reference": "https://openai.com/academy/prompting/",
+            "why_it_is_included": "Provides a short beginner-friendly frame for clear tasks, context, and iteration."
+          }
+        ]
+      },
+      "didactic_arc": [
+        {
+          "block": "kick-off",
+          "time_min": 6,
+          "learning_purpose": "Connect prompt engineering to daily consulting work and surface baseline habits.",
+          "trainer_actions": [
+            "Ask participants to compare their pre-bite prompts in pairs.",
+            "Collect two recurring prompt problems on the board.",
+            "Frame the session as a method for reducing ambiguity, not as magic wording."
+          ],
+          "participant_actions": [
+            "Share one prompt they brought from the pre-bite.",
+            "Name one failure mode they have seen in model responses.",
+            "Commit to testing prompts against a clear expected output."
+          ],
+          "content_outline": [
+            "Why consultants need reliable prompting",
+            "Prompt engineering as a practical communication skill",
+            "Session output: one improved prompt and one explanation of why it is better"
+          ],
+          "learning_check": "Participants can name one concrete prompt quality criterion before theory begins."
+        },
+        {
+          "block": "theory",
+          "time_min": 20,
+          "learning_purpose": "Build a beginner mental model of prompt components and the causes of poor responses.",
+          "trainer_actions": [
+            "Explain prompt engineering as task framing, context, constraints, examples, and iteration.",
+            "Show how ambiguity, missing context, and unclear formats increase response variance.",
+            "Introduce the prompt canvas: task, context, inputs, constraints, output, audience, success check."
+          ],
+          "participant_actions": [
+            "Map a weak prompt to missing prompt-canvas fields.",
+            "Mark whether a prompt problem is about task, context, format, or validation.",
+            "Ask clarification questions about boundaries between components."
+          ],
+          "content_outline": [
+            "What a prompt is and what prompt engineering changes",
+            "Prompt components for consulting tasks",
+            "Technique set: specificity, context, output format, examples, and iteration",
+            "Why these techniques work: reducing ambiguity and shaping likely response patterns",
+            "Misconception: prompt engineering is not memorizing universal phrases"
+          ],
+          "learning_check": "Participants classify three flawed prompt snippets by the main missing component."
+        },
+        {
+          "block": "example",
+          "time_min": 8,
+          "learning_purpose": "Make the prompt canvas concrete through a consulting scenario.",
+          "trainer_actions": [
+            "Walk through a weak prompt for summarizing client interview notes.",
+            "Improve it step by step using the prompt canvas.",
+            "Explain how each change affects expected model behavior."
+          ],
+          "participant_actions": [
+            "Predict what could go wrong with the weak prompt.",
+            "Identify which improvement changed task clarity, context, format, or validation.",
+            "Suggest one additional constraint relevant to a client-facing output."
+          ],
+          "content_outline": [
+            "Weak prompt: summarize these notes",
+            "Improved prompt with audience, purpose, source boundaries, format, and caveats",
+            "Explanation of why the improved version is easier for a model to satisfy"
+          ],
+          "learning_check": "Participants identify at least two prompt changes and explain their purpose."
+        },
+        {
+          "block": "exercise",
+          "time_min": 16,
+          "learning_purpose": "Have participants transform their own vague prompt into a structured, testable prompt.",
+          "trainer_actions": [
+            "Give instructions for individual rewriting followed by pair review.",
+            "Use the handout to guide prompt-canvas completion.",
+            "Debrief common improvements and unresolved risks."
+          ],
+          "participant_actions": [
+            "Rewrite their pre-bite prompt using the prompt canvas.",
+            "Use the handout checklist to inspect a peer's prompt.",
+            "Revise one component based on feedback."
+          ],
+          "content_outline": [
+            "Individual rewrite",
+            "Peer review with prompt-canvas checklist",
+            "Debrief: strongest improvement and remaining uncertainty"
+          ],
+          "learning_check": "Each participant produces a revised prompt with at least task, context, output format, and success check."
+        },
+        {
+          "block": "wrap-up",
+          "time_min": 5,
+          "learning_purpose": "Consolidate the first technique set and bridge to explanation of advanced beginner patterns.",
+          "trainer_actions": [
+            "Summarize the practical prompt canvas.",
+            "Ask participants to state why one prompt change helps.",
+            "Assign the post-bite reflection."
+          ],
+          "participant_actions": [
+            "Write one sentence explaining why their revised prompt is stronger.",
+            "Choose one technique to test in the next workday.",
+            "Note one open question for session 2."
+          ],
+          "content_outline": [
+            "Takeaway: good prompts make the task, context, and expected output explicit",
+            "Transfer question for consulting work",
+            "Post-bite setup"
+          ],
+          "learning_check": "Participants can explain one prompt improvement using the language of ambiguity, context, or format."
+        }
+      ],
+      "deck_outline": [
+        {
+          "slide_n": 1,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "Why Prompting Matters In Consulting",
+          "learning_purpose": "Create relevance by connecting prompting to client-facing work.",
+          "key_message": "Prompt engineering is a practical way to get more useful model responses for real consulting tasks.",
+          "suggested_content": [
+            "Typical consultant tasks: summarize, structure, draft, analyze, compare",
+            "Common failure modes: vague outputs, wrong format, made-up certainty, missed context",
+            "Session promise: improve one real prompt and explain the improvement"
+          ],
+          "reliability": {
+            "score": 0.9,
+            "rationale": "Directly grounded in intake audience and stable professional use cases.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 2,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "Prompt Diagnostic Pair Share",
+          "learning_purpose": "Surface participants' current prompt habits before teaching the model.",
+          "key_message": "A useful prompt can be inspected before it is ever tested.",
+          "suggested_content": [
+            "Pair prompt swap",
+            "Mark one thing that is clear",
+            "Mark one thing the model would have to guess"
+          ],
+          "reliability": {
+            "score": 0.82,
+            "rationale": "Established active-learning practice adapted to this audience.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 3,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "Today's Working Definition",
+          "learning_purpose": "Give beginners a usable definition of prompt engineering.",
+          "key_message": "Prompt engineering means deliberately designing and refining instructions, context, constraints, and examples.",
+          "suggested_content": [
+            "Design the input",
+            "Observe the output",
+            "Refine based on what is missing, ambiguous, or unsafe"
+          ],
+          "reliability": {
+            "score": 0.92,
+            "rationale": "Consistent with OpenAI definitions and provider guidance.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 4,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "The Prompt Canvas",
+          "learning_purpose": "Introduce a compact structure participants can reuse.",
+          "key_message": "Most beginner prompts improve when task, context, input, constraints, output, audience, and success check are explicit.",
+          "suggested_content": [
+            "Task: what should the model do",
+            "Context: what situation and background matter",
+            "Input: what material should it use",
+            "Constraints: what boundaries should it follow",
+            "Output: what shape should the answer take",
+            "Audience: who will use the result",
+            "Success check: how the answer will be judged"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Synthesis of provider prompting guidance into a beginner teaching scaffold.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 5,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 1: State The Task Precisely",
+          "learning_purpose": "Show how action verbs and clear outcomes reduce interpretation.",
+          "key_message": "The model can respond better when the requested action and desired result are unambiguous.",
+          "suggested_content": [
+            "Weak: help with this client issue",
+            "Stronger: identify three root-cause hypotheses from these notes",
+            "Task verbs: summarize, classify, compare, draft, critique, transform"
+          ],
+          "reliability": {
+            "score": 0.91,
+            "rationale": "Strongly aligned with official guidance to be clear and specific.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 6,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 2: Add Relevant Context",
+          "learning_purpose": "Explain why background information changes response quality.",
+          "key_message": "Context tells the model which interpretation of the task is most useful.",
+          "suggested_content": [
+            "Client sector and audience",
+            "Decision or deliverable the output supports",
+            "Known constraints and terminology",
+            "Avoid dumping irrelevant background"
+          ],
+          "reliability": {
+            "score": 0.9,
+            "rationale": "Grounded in official OpenAI and Microsoft guidance on context and supporting content.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 7,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 3: Separate Instructions From Source Material",
+          "learning_purpose": "Teach a basic structure for reducing confusion between task and input.",
+          "key_message": "Clear separation makes it easier to tell what the model should do and what it should use.",
+          "suggested_content": [
+            "Instruction first",
+            "Source material clearly labelled",
+            "Boundaries such as quotes, headings, or pasted sections",
+            "Ask the model to use only the provided material when needed"
+          ],
+          "reliability": {
+            "score": 0.9,
+            "rationale": "Official OpenAI API guidance recommends placing instructions clearly and separating context.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 8,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 4: Specify Output Format",
+          "learning_purpose": "Help participants control response shape without tool-specific features.",
+          "key_message": "A clear format turns a broad answer into something easier to review and reuse.",
+          "suggested_content": [
+            "Bullets, table, checklist, memo, JSON-like fields, email draft",
+            "Length and level of detail",
+            "Column names or headings",
+            "What to omit"
+          ],
+          "reliability": {
+            "score": 0.91,
+            "rationale": "Supported by official guidance to articulate desired format and details.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 9,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 5: Iterate With A Specific Diagnosis",
+          "learning_purpose": "Replace trial-and-error with deliberate refinement.",
+          "key_message": "Iteration works best when each revision targets a named problem in the response.",
+          "suggested_content": [
+            "Response too generic: add audience and decision context",
+            "Wrong format: specify headings or fields",
+            "Overconfident: ask for assumptions and unknowns",
+            "Too long: add length and prioritization constraints"
+          ],
+          "reliability": {
+            "score": 0.88,
+            "rationale": "Grounded in provider guidance on iterative refinement and practical synthesis.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 10,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Why These Techniques Work",
+          "learning_purpose": "Connect prompt patterns to practical model behavior.",
+          "key_message": "Prompting improves results by reducing ambiguity and making the desired response pattern easier to infer.",
+          "suggested_content": [
+            "Clear task narrows possible responses",
+            "Context changes relevance",
+            "Format instructions shape structure",
+            "Examples and constraints show what good looks like",
+            "Iteration uses observed output as feedback"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Practical explanation synthesized from provider guidance and general LLM behavior descriptions.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 11,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Misconception: Magic Words",
+          "learning_purpose": "Prevent beginners from treating prompting as memorized phrases.",
+          "key_message": "The transferable skill is diagnosing the task and response, not copying a universal prompt formula.",
+          "suggested_content": [
+            "No single perfect prompt",
+            "Technique choice depends on task type",
+            "Different models may respond differently",
+            "A good prompt still needs output review"
+          ],
+          "reliability": {
+            "score": 0.85,
+            "rationale": "Supported by provider notes on iteration and model differences, with some trainer synthesis.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 12,
+          "slide_type": "break",
+          "message": "Break: 5 minutes. Return ready to improve a consulting prompt.",
+          "duration_min": 5,
+          "reliability": {
+            "score": 1.0,
+            "rationale": "Directly follows the intake requirement for a five-minute break.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 13,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Worked Example: Weak Prompt",
+          "learning_purpose": "Give participants a concrete prompt to diagnose.",
+          "key_message": "A vague consulting prompt forces the model to guess the role, purpose, audience, and output.",
+          "suggested_content": [
+            "Prompt: summarize these client notes",
+            "Likely problems: generic summary, missed decision context, no caveats",
+            "Ask participants what the model has to infer"
+          ],
+          "reliability": {
+            "score": 0.82,
+            "rationale": "Realistic consulting scenario created from audience context.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 14,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Worked Example: Add Task And Audience",
+          "learning_purpose": "Show the first improvement step and its purpose.",
+          "key_message": "Adding the business action and audience helps the model prioritize useful information.",
+          "suggested_content": [
+            "Task: prepare a concise risk summary",
+            "Audience: project sponsor",
+            "Purpose: decide whether discovery should continue"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Synthesis of prompt-canvas guidance applied to a consulting use case.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 15,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Worked Example: Add Format And Caveats",
+          "learning_purpose": "Demonstrate controlling output shape and uncertainty.",
+          "key_message": "Format and caveat instructions make the response easier to review before client use.",
+          "suggested_content": [
+            "Output: table with risk, evidence, impact, missing information",
+            "Constraint: use only the notes provided",
+            "Caveat: mark assumptions explicitly"
+          ],
+          "reliability": {
+            "score": 0.87,
+            "rationale": "Grounded in official format and specificity guidance.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 16,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Why The Revised Prompt Is Stronger",
+          "learning_purpose": "Make participants verbalize the causal explanation.",
+          "key_message": "The prompt is stronger because it narrows the task, provides business context, defines structure, and sets review boundaries.",
+          "suggested_content": [
+            "Task clarity",
+            "Relevant context",
+            "Expected format",
+            "Source boundary",
+            "Uncertainty handling"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Conceptual synthesis from official sources and the worked example.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 17,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Exercise Setup: Rewrite Your Prompt",
+          "learning_purpose": "Clarify the participant task and expected output.",
+          "key_message": "Your goal is to turn your original prompt into a structured prompt that another consultant could understand and reuse.",
+          "suggested_content": [
+            "Use your pre-bite prompt",
+            "Fill missing canvas fields",
+            "Aim for a prompt that produces a reviewable output"
+          ],
+          "reliability": {
+            "score": 0.83,
+            "rationale": "Active exercise design aligned with session objectives.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 18,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Individual Rewrite",
+          "learning_purpose": "Create quiet application time before peer influence.",
+          "key_message": "First drafts improve fastest when you name exactly what the model should stop guessing.",
+          "suggested_content": [
+            "Mark missing task details",
+            "Add only relevant context",
+            "Define output format",
+            "Add a success check"
+          ],
+          "reliability": {
+            "score": 0.8,
+            "rationale": "Pedagogical choice based on active practice and prompting principles.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 19,
+          "slide_type": "handout",
+          "didactic_block": "exercise",
+          "message": "Handout work: use the prompt canvas checklist to inspect and improve one prompt.",
+          "time_budget_min": 5,
+          "reliability": {
+            "score": 1.0,
+            "rationale": "Directly follows the intake requirement for five minutes of handout work.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 20,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Pair Review",
+          "learning_purpose": "Use peer review to catch ambiguity the writer may miss.",
+          "key_message": "A reviewer should be able to tell what output the prompt is trying to create and how it will be judged.",
+          "suggested_content": [
+            "Reviewer names one clear component",
+            "Reviewer names one component still missing",
+            "Writer revises one sentence or constraint"
+          ],
+          "reliability": {
+            "score": 0.79,
+            "rationale": "Useful classroom practice adapted to prompt review; trainer may tune to group size.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 21,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Debrief: What Changed",
+          "learning_purpose": "Convert exercise activity into shared learning.",
+          "key_message": "The most valuable revision is the one that removes a real source of guesswork.",
+          "suggested_content": [
+            "One task improvement",
+            "One context improvement",
+            "One output-format improvement",
+            "One remaining risk"
+          ],
+          "reliability": {
+            "score": 0.8,
+            "rationale": "Exercise debrief aligned with stated learning outcomes.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 22,
+          "slide_type": "content",
+          "didactic_block": "wrap-up",
+          "title": "Session 1 Takeaways",
+          "learning_purpose": "Consolidate the prompt-canvas technique set.",
+          "key_message": "Better prompts make task, context, output, and success criteria visible.",
+          "suggested_content": [
+            "Prompt engineering is design plus refinement",
+            "Specificity reduces ambiguity",
+            "Context changes relevance",
+            "Format makes output usable",
+            "Review remains necessary"
+          ],
+          "reliability": {
+            "score": 0.89,
+            "rationale": "Summarizes high-confidence concepts from official sources and session content.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 23,
+          "slide_type": "content",
+          "didactic_block": "wrap-up",
+          "title": "Bridge To Session 2",
+          "learning_purpose": "Prepare learners for deeper techniques and explanation.",
+          "key_message": "Next session moves from stronger single prompts to examples, decomposition, validation, and risk awareness.",
+          "suggested_content": [
+            "Bring your revised prompt output if you test it",
+            "Note one place the output still needed human judgment",
+            "Post-bite reflection question"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Directly tied to programme sequence and participant preparation.",
+            "review_priority": "low"
+          }
+        }
+      ],
+      "handout": {
+        "time_budget_min": 5,
+        "purpose": "Guide participants through structured diagnosis and rewriting of one practical prompt.",
+        "activities": [
+          {
+            "activity_title": "Prompt Canvas Checklist",
+            "instructions": [
+              "Write the original prompt at the top.",
+              "Fill in task, context, input, constraints, output, audience, and success check.",
+              "Circle the two weakest fields.",
+              "Rewrite the prompt so those fields are explicit.",
+              "Give the prompt to a peer and ask what the model would still have to guess."
+            ],
+            "participant_output": "One revised prompt plus one sentence explaining why it should work better."
+          }
+        ]
+      },
+      "post_bite": {
+        "purpose": "Encourage transfer from the training room to a real or realistic consulting task.",
+        "time_min": 10,
+        "participant_task": "Test your revised prompt or mentally simulate the output; write down one improvement that worked and one remaining limitation.",
+        "resources": [
+          {
+            "title": "OpenAI Help Center: Prompt engineering best practices",
+            "url_or_reference": "https://help.openai.com/en/articles/10032626-prompt-engineering-best--practices-for-chatgpt",
+            "why_it_is_included": "Reinforces the first session's emphasis on clarity, specificity, context, and iteration."
+          }
+        ]
+      }
+    },
+    {
+      "session_n": 2,
+      "title": "Prompting Techniques: Examples, Decomposition, Validation, and Risk",
+      "duration_min": 60,
+      "brief_for_trainer": {
+        "session_purpose": "Extend the basic prompt canvas with examples, task decomposition, fallback instructions, output validation, and prompt-injection awareness.",
+        "intended_skills": [
+          "Use examples to define response patterns",
+          "Break complex requests into simpler prompt steps",
+          "Add fallback and uncertainty instructions",
+          "Validate outputs against source material and success criteria",
+          "Explain basic prompt-injection risk"
+        ],
+        "learning_outcomes": [
+          "Participants can choose when to use examples, decomposition, fallback instructions, or validation checks.",
+          "Participants can explain why examples and decomposition can improve response reliability.",
+          "Participants can identify when prompt-only control is insufficient and human or system validation is needed."
+        ]
+      },
+      "pre_bite": {
+        "purpose": "Bring session 1 practice forward and prime participants to notice residual uncertainty.",
+        "time_min": 10,
+        "participant_task": "Review the prompt you improved in session 1 and note one output quality risk that the prompt alone may not solve.",
+        "resources": [
+          {
+            "title": "Microsoft Learn: Prompt engineering techniques",
+            "url_or_reference": "https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/prompt-engineering",
+            "why_it_is_included": "Adds practical guidance on prompt components, specificity, ordering, fallback paths, and validation."
+          }
+        ]
+      },
+      "didactic_arc": [
+        {
+          "block": "kick-off",
+          "time_min": 6,
+          "learning_purpose": "Reconnect to session 1 outputs and create a need for additional techniques.",
+          "trainer_actions": [
+            "Ask participants to share one remaining risk from their post-bite.",
+            "Cluster risks into unclear pattern, complex task, unsupported claim, and unsafe instruction.",
+            "Position session 2 techniques as targeted responses to those risk types."
+          ],
+          "participant_actions": [
+            "Share one limitation that remained after a better prompt.",
+            "Map that limitation to a technique need.",
+            "Recall one session 1 principle."
+          ],
+          "content_outline": [
+            "Bridge from prompt canvas to technique choice",
+            "Four common problems after a decent prompt",
+            "Session output: a technique-selection rationale"
+          ],
+          "learning_check": "Participants can connect one observed prompt problem to a technique category."
+        },
+        {
+          "block": "theory",
+          "time_min": 20,
+          "learning_purpose": "Teach a practical second-layer prompting toolkit and the reasoning behind it.",
+          "trainer_actions": [
+            "Explain examples, decomposition, fallback instructions, validation checks, and prompt-injection awareness.",
+            "Compare when each technique is useful and when it is insufficient.",
+            "Emphasize tool-agnostic reasoning rather than platform features."
+          ],
+          "participant_actions": [
+            "Match techniques to prompt problems.",
+            "Explain why examples or decomposition could change a model response.",
+            "Identify which outputs require human validation."
+          ],
+          "content_outline": [
+            "Few-shot examples as pattern-setting",
+            "Decomposition for complex or multi-step tasks",
+            "Fallback instructions and uncertainty handling",
+            "Validation: source checks, assumptions, and review criteria",
+            "Prompt injection and the limit of prompt-only safeguards"
+          ],
+          "learning_check": "Participants select a technique for four prompt problems and justify each choice."
+        },
+        {
+          "block": "example",
+          "time_min": 8,
+          "learning_purpose": "Show how multiple techniques combine in a realistic consultant workflow.",
+          "trainer_actions": [
+            "Walk through improving a client workshop synthesis prompt.",
+            "Add an example output row, split the task into stages, and add validation criteria.",
+            "Point out why prompt-injection awareness matters when using untrusted client text."
+          ],
+          "participant_actions": [
+            "Predict which technique will solve each observed issue.",
+            "Identify the source-boundary and validation instruction.",
+            "Name one remaining human review responsibility."
+          ],
+          "content_outline": [
+            "Scenario: turn workshop notes into themes, risks, and next actions",
+            "Technique combination: example plus decomposition plus validation",
+            "Risk note: untrusted text can contain instructions that should not override the task"
+          ],
+          "learning_check": "Participants explain why at least two techniques are used in the worked example."
+        },
+        {
+          "block": "exercise",
+          "time_min": 16,
+          "learning_purpose": "Have participants choose and apply techniques based on a prompt problem diagnosis.",
+          "trainer_actions": [
+            "Give small groups a consultant prompt scenario with flawed output.",
+            "Use the handout to guide technique selection and revision.",
+            "Facilitate a short debrief focused on why the chosen technique should help."
+          ],
+          "participant_actions": [
+            "Diagnose the prompt problem.",
+            "Select one or two techniques from the toolkit.",
+            "Rewrite the prompt and add a validation instruction.",
+            "Explain the causal logic behind the revision."
+          ],
+          "content_outline": [
+            "Group diagnosis",
+            "Technique selection",
+            "Prompt revision",
+            "Explanation and debrief"
+          ],
+          "learning_check": "Each group presents a revised prompt and a one-minute explanation of why the chosen technique fits."
+        },
+        {
+          "block": "wrap-up",
+          "time_min": 5,
+          "learning_purpose": "Consolidate the full two-session toolkit and anchor transfer to consulting practice.",
+          "trainer_actions": [
+            "Summarize the complete tool-agnostic prompting workflow.",
+            "Ask participants to choose one technique for immediate use.",
+            "Assign the post-bite transfer task."
+          ],
+          "participant_actions": [
+            "State one technique and one use case.",
+            "Name one output they would always validate.",
+            "Commit to one prompt improvement habit."
+          ],
+          "content_outline": [
+            "Workflow: diagnose, structure, technique-select, test, validate",
+            "Responsible use reminder",
+            "Post-bite transfer task"
+          ],
+          "learning_check": "Participants can describe the prompt-engineering workflow and one validation habit."
+        }
+      ],
+      "deck_outline": [
+        {
+          "slide_n": 1,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "What Still Went Wrong?",
+          "learning_purpose": "Use post-bite observations to motivate advanced beginner techniques.",
+          "key_message": "A structured prompt can still produce outputs that need examples, decomposition, validation, or risk controls.",
+          "suggested_content": [
+            "Collect one remaining risk per table",
+            "Cluster risks by prompt problem",
+            "Frame technique choice as diagnosis"
+          ],
+          "reliability": {
+            "score": 0.83,
+            "rationale": "Builds directly from the planned post-bite and session sequence.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 2,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "From Canvas To Technique Choice",
+          "learning_purpose": "Show how session 2 extends the first session rather than replacing it.",
+          "key_message": "The prompt canvas identifies what is missing; techniques help fix specific kinds of missing guidance.",
+          "suggested_content": [
+            "Pattern unclear: add examples",
+            "Task too large: decompose",
+            "Evidence uncertain: validate",
+            "Risky input: limit trust and review"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Synthesis of prior session structure and provider-backed techniques.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 3,
+          "slide_type": "content",
+          "didactic_block": "kick-off",
+          "title": "Session 2 Output",
+          "learning_purpose": "Make success criteria explicit.",
+          "key_message": "By the end, participants should be able to pick a technique and explain why it fits the problem.",
+          "suggested_content": [
+            "Choose a technique",
+            "Apply it to a flawed prompt",
+            "Add validation",
+            "Explain the mechanism in plain language"
+          ],
+          "reliability": {
+            "score": 0.94,
+            "rationale": "Directly derived from intake outcomes and session objectives.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 4,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 6: Give Examples",
+          "learning_purpose": "Teach examples as a way to specify desired response patterns.",
+          "key_message": "Examples show the model what kind of answer pattern you expect when instructions alone are not enough.",
+          "suggested_content": [
+            "One or two representative examples",
+            "Show inputs and desired outputs",
+            "Use examples for tone, labels, categories, or structure",
+            "Avoid examples that conflict with the real task"
+          ],
+          "reliability": {
+            "score": 0.9,
+            "rationale": "Grounded in official guidance to articulate output format through examples.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 5,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Why Examples Work",
+          "learning_purpose": "Explain the mechanism behind example-based prompting.",
+          "key_message": "Examples reduce the gap between an abstract instruction and the concrete pattern the answer should follow.",
+          "suggested_content": [
+            "They demonstrate labels or categories",
+            "They show level of detail",
+            "They clarify edge cases",
+            "They can also bias the response if poorly chosen"
+          ],
+          "reliability": {
+            "score": 0.82,
+            "rationale": "Practical synthesis from official example guidance and academic taxonomy.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 6,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 7: Break Down The Task",
+          "learning_purpose": "Teach decomposition for complex consultant requests.",
+          "key_message": "Complex requests become easier to control when they are split into smaller steps with visible intermediate outputs.",
+          "suggested_content": [
+            "First extract facts",
+            "Then group themes",
+            "Then draft recommendations",
+            "Then check assumptions and gaps"
+          ],
+          "reliability": {
+            "score": 0.88,
+            "rationale": "Supported by official guidance to break down complex requests and practical workflow design.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 7,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Why Decomposition Works",
+          "learning_purpose": "Connect decomposition to reviewability and cognitive load.",
+          "key_message": "Smaller steps make intermediate assumptions visible and easier for humans to inspect.",
+          "suggested_content": [
+            "Reduces hidden leaps",
+            "Creates checkpoints",
+            "Lets the consultant intervene earlier",
+            "Improves auditability of the final answer"
+          ],
+          "reliability": {
+            "score": 0.8,
+            "rationale": "Useful pedagogical explanation based on workflow reasoning; trainer should adapt examples.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 8,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 8: Give The Model A Fallback",
+          "learning_purpose": "Teach uncertainty handling for insufficient evidence.",
+          "key_message": "Fallback instructions reduce pressure to invent an answer when the available information is incomplete.",
+          "suggested_content": [
+            "If the answer is not present, say not found",
+            "List assumptions separately",
+            "Ask clarifying questions when necessary",
+            "Separate evidence from recommendation"
+          ],
+          "reliability": {
+            "score": 0.88,
+            "rationale": "Supported by Microsoft guidance on giving the model an out and validating responses.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 9,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 9: Add Validation Criteria",
+          "learning_purpose": "Make participants treat outputs as drafts to verify.",
+          "key_message": "A good prompt can ask for checks, but the consultant remains responsible for reviewing the answer.",
+          "suggested_content": [
+            "Ask for source-linked evidence when source text is provided",
+            "Ask for assumptions and missing information",
+            "Check against the intended audience and decision",
+            "Flag claims that need external verification"
+          ],
+          "reliability": {
+            "score": 0.87,
+            "rationale": "Grounded in official caution that outputs still need validation.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 10,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique 10: Treat Untrusted Text Carefully",
+          "learning_purpose": "Introduce prompt-injection risk at an appropriate beginner level.",
+          "key_message": "Text supplied by users, websites, documents, or clients may contain instructions that should not override your task.",
+          "suggested_content": [
+            "Direct and indirect instruction risk",
+            "Do not rely on prompt wording alone for sensitive actions",
+            "Keep human review for client-facing or high-impact outputs",
+            "Use system controls when building applications"
+          ],
+          "reliability": {
+            "score": 0.82,
+            "rationale": "Based on OWASP prompt injection guidance, simplified for a non-security training.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 11,
+          "slide_type": "content",
+          "didactic_block": "theory",
+          "title": "Technique Selection Map",
+          "learning_purpose": "Help participants choose rather than memorize techniques.",
+          "key_message": "Use the technique that matches the failure mode you are trying to prevent.",
+          "suggested_content": [
+            "Unclear target pattern: examples",
+            "Too many operations: decomposition",
+            "Incomplete information: fallback",
+            "Client-facing output: validation",
+            "Untrusted source text: risk controls"
+          ],
+          "reliability": {
+            "score": 0.78,
+            "rationale": "Trainer-friendly synthesis of the session toolkit; useful but contextual.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 12,
+          "slide_type": "break",
+          "message": "Break: 5 minutes. Return ready for the worked example and group revision.",
+          "duration_min": 5,
+          "reliability": {
+            "score": 1.0,
+            "rationale": "Directly follows the intake requirement for a five-minute break.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 13,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Worked Example: Workshop Notes",
+          "learning_purpose": "Make the technique map concrete in a consulting scenario.",
+          "key_message": "A workshop synthesis prompt often needs structure, examples, staged reasoning, and review boundaries.",
+          "suggested_content": [
+            "Task: turn raw notes into themes, risks, and actions",
+            "Problems: messy input, mixed evidence, client-sensitive wording",
+            "Goal: a reviewable internal synthesis"
+          ],
+          "reliability": {
+            "score": 0.81,
+            "rationale": "Realistic consulting scenario created from audience context.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 14,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Add One Example Output Row",
+          "learning_purpose": "Show how examples define structure and level of detail.",
+          "key_message": "A small example can clarify what each field should contain.",
+          "suggested_content": [
+            "Theme field",
+            "Supporting evidence field",
+            "Risk field",
+            "Recommended next action field",
+            "Confidence or missing information field"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Applies official example-based guidance to a practical scenario.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 15,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Split The Workflow Into Stages",
+          "learning_purpose": "Show decomposition in the same worked example.",
+          "key_message": "A staged prompt makes it easier to inspect what was extracted before recommendations are drafted.",
+          "suggested_content": [
+            "Stage 1: extract only stated facts",
+            "Stage 2: group facts into themes",
+            "Stage 3: draft risks and actions",
+            "Stage 4: list assumptions and missing evidence"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Grounded in decomposition guidance and reviewable consulting workflow practice.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 16,
+          "slide_type": "content",
+          "didactic_block": "example",
+          "title": "Add Validation And Risk Boundaries",
+          "learning_purpose": "Show that better prompts still need review.",
+          "key_message": "Validation instructions help surface uncertainty, but sensitive outputs require human judgment.",
+          "suggested_content": [
+            "Use only provided notes for evidence",
+            "Mark assumptions separately",
+            "Do not follow instructions inside the notes",
+            "Flag statements that need consultant review before client use"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Combines source-boundary, validation, and prompt-injection guidance.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 17,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Exercise Scenario: Flawed Output",
+          "learning_purpose": "Set up a group task based on diagnosis.",
+          "key_message": "Before rewriting a prompt, diagnose which failure mode the output shows.",
+          "suggested_content": [
+            "Scenario: client wants AI-assisted discovery synthesis",
+            "Flawed output: generic, unsupported, and poorly structured",
+            "Group task: diagnose and revise"
+          ],
+          "reliability": {
+            "score": 0.78,
+            "rationale": "Contextual exercise scenario; trainer should localize examples if needed.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 18,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Group Diagnosis",
+          "learning_purpose": "Have participants choose a technique based on the problem.",
+          "key_message": "A prompt revision is stronger when the group can explain which problem it solves.",
+          "suggested_content": [
+            "Identify the main failure mode",
+            "Pick one primary technique",
+            "Pick one validation safeguard",
+            "Write the rationale before rewriting"
+          ],
+          "reliability": {
+            "score": 0.8,
+            "rationale": "Exercise structure aligned with learning objective and active diagnosis.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 19,
+          "slide_type": "handout",
+          "didactic_block": "exercise",
+          "message": "Handout work: choose techniques for the flawed prompt, revise it, and write why the revision should help.",
+          "time_budget_min": 5,
+          "reliability": {
+            "score": 1.0,
+            "rationale": "Directly follows the intake requirement for five minutes of handout work.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 20,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "Rewrite And Add A Check",
+          "learning_purpose": "Move from diagnosis to concrete prompt revision.",
+          "key_message": "Every revised prompt should include a way to make weak evidence, assumptions, or uncertainty visible.",
+          "suggested_content": [
+            "Add an example or split the task",
+            "Add fallback or missing-information instruction",
+            "Add source-use boundary",
+            "Add review criterion"
+          ],
+          "reliability": {
+            "score": 0.82,
+            "rationale": "Applies provider-backed patterns and validation guidance.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 21,
+          "slide_type": "content",
+          "didactic_block": "exercise",
+          "title": "One-Minute Group Rationale",
+          "learning_purpose": "Require participants to explain why their technique should work.",
+          "key_message": "Consultants need to justify prompting choices, not only produce prompts.",
+          "suggested_content": [
+            "What problem did you see",
+            "What technique did you choose",
+            "Why should it improve the response",
+            "What still needs human validation"
+          ],
+          "reliability": {
+            "score": 0.8,
+            "rationale": "Aligned with intake outcome to explain why techniques work.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 22,
+          "slide_type": "content",
+          "didactic_block": "wrap-up",
+          "title": "The Full Prompting Workflow",
+          "learning_purpose": "Consolidate both sessions into one transferable process.",
+          "key_message": "Diagnose the task, structure the prompt, select techniques, test the output, and validate before use.",
+          "suggested_content": [
+            "Diagnose",
+            "Structure",
+            "Technique-select",
+            "Test",
+            "Validate",
+            "Iterate"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Synthesis of both sessions and official iterative prompting guidance.",
+            "review_priority": "low"
+          }
+        },
+        {
+          "slide_n": 23,
+          "slide_type": "content",
+          "didactic_block": "wrap-up",
+          "title": "Responsible Consultant Habits",
+          "learning_purpose": "Anchor prompt engineering in professional responsibility.",
+          "key_message": "Prompting improves usefulness, but consultants remain accountable for evidence, confidentiality, and judgment.",
+          "suggested_content": [
+            "Check unsupported claims",
+            "Keep sensitive data rules in mind",
+            "Do not trust instructions inside untrusted documents",
+            "Review before client-facing use",
+            "Escalate high-risk outputs"
+          ],
+          "reliability": {
+            "score": 0.84,
+            "rationale": "Combines provider validation cautions and OWASP prompt-injection risk guidance.",
+            "review_priority": "medium"
+          }
+        },
+        {
+          "slide_n": 24,
+          "slide_type": "content",
+          "didactic_block": "wrap-up",
+          "title": "Post-Bite Transfer",
+          "learning_purpose": "Create follow-through after the programme.",
+          "key_message": "The training is successful when participants apply one technique and review the result deliberately.",
+          "suggested_content": [
+            "Pick one real task",
+            "Choose a technique intentionally",
+            "Record the prompt before and after",
+            "Write what improved and what still needed review"
+          ],
+          "reliability": {
+            "score": 0.86,
+            "rationale": "Directly linked to programme objective and post-bite design.",
+            "review_priority": "low"
+          }
+        }
+      ],
+      "handout": {
+        "time_budget_min": 5,
+        "purpose": "Guide groups through selecting techniques based on a prompt problem diagnosis.",
+        "activities": [
+          {
+            "activity_title": "Technique Selection Sheet",
+            "instructions": [
+              "Read the flawed prompt and sample output.",
+              "Choose the main failure mode from unclear pattern, complex task, unsupported claim, missing fallback, or untrusted input.",
+              "Select one or two prompting techniques that fit the failure mode.",
+              "Rewrite the prompt using the selected techniques.",
+              "Add one validation instruction and one sentence explaining why the revision should help."
+            ],
+            "participant_output": "A revised prompt, selected techniques, validation instruction, and explanation of why the techniques fit."
+          }
+        ]
+      },
+      "post_bite": {
+        "purpose": "Create a small transfer assignment that reinforces technique selection and responsible review.",
+        "time_min": 10,
+        "participant_task": "Apply one technique from session 2 to a real or realistic work prompt, then write a short before-and-after note explaining what changed and what still required human validation.",
+        "resources": [
+          {
+            "title": "The Prompt Report: A Systematic Survey of Prompting Techniques",
+            "url_or_reference": "https://arxiv.org/abs/2406.06608",
+            "why_it_is_included": "Shows that prompt engineering contains many techniques, reinforcing the need to choose techniques by task fit."
+          },
+          {
+            "title": "OWASP Foundation: Prompt Injection",
+            "url_or_reference": "https://owasp.org/www-community/attacks/PromptInjection",
+            "why_it_is_included": "Provides a practical reminder that prompt wording alone is not a complete control for unsafe or adversarial inputs."
+          }
+        ]
+      }
+    }
+  ],
+  "validation": {
+    "schema_validated": true,
+    "didactic_arc_verified": true,
+    "timing_verified": true,
+    "slide_density_verified": true,
+    "research_used": true,
+    "issues": []
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-06-06T15:28:40.657333+00:00",
+  "lesson_plan": ".agents/skills/maverx-training-builder/out/prompt-engineering-for-tech-consultants/lesson_plan.json",
+  "outputs": [
+    {
+      "session_n": 1,
+      "pptx": ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-01.pptx",
+      "docx": [
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-01-pre-bite.docx",
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-01-post-bite.docx",
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-01-handout.docx"
+      ]
+    },
+    {
+      "session_n": 2,
+      "pptx": ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-02.pptx",
+      "docx": [
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-02-pre-bite.docx",
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-02-post-bite.docx",
+        ".agents/skills/maverx-presentation-builder/out/prompt-engineering-for-tech-consultants/prompt-engineering-for-tech-consultants-session-02-handout.docx"
+      ]
+    }
+  ]
+}
